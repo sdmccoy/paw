@@ -4,8 +4,7 @@ import { createStore } from 'redux';
 import './App.css';
 
 import reducers from './reducers';
-import ModuleContainer from './modules/ModuleContainer';
-import Footer from './components/Footer';
+import Layout from './modules/Layout';
 
 import pets from './data/pets';
 import petContract from './data/petProfileContract'
@@ -16,7 +15,7 @@ class App extends Component {
   
   componentDidMount() {
 
-    fetch(
+    window.fetch(
       'https://s3-us-west-2.amazonaws.com/cozi-interview-dev/pets.json',
       {
         headers : { 
@@ -30,24 +29,25 @@ class App extends Component {
     })
     .then(petsJson => {
       console.log(JSON.stringify(petsJson));
-      petsData = JSON.stringify(petsJson) || petsData;
+      petsData = JSON.stringify(petsJson);
     })
     .catch(error => {
+      console.log('oiy')
       console.error(error);;
-      petsData = pets || petsData;
+      petsData = pets;
     })
   }
 
   render() {
-    console.log(petsData)
+    console.log({pets})
+    console.log({petsData})
     return (
       <Provider store={createStore(reducers)} className="App">
-        <ModuleContainer 
-          pets={ petsData }
+        <Layout 
+          pets={ pets }
           // user={ user }
           // key={ key }
         />
-        <Footer />
       </Provider>
     );
   }

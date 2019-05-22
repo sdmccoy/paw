@@ -1,12 +1,12 @@
 module.exports = 
 [
     {
-        "id": 0,
+        "id": null,
         "type": "",
         "name": "",
         "img": "",
         "sex": "",
-        "age": 0,
+        "age": null,
         "profile": ""
     }
 ]

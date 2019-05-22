@@ -3,10 +3,10 @@ import SearchModule from './SearchModule';
 import SavedModule from './SavedModule';
 import SettingsModule from './SettingsModule';
 
-const ModuleContainer = ({ pets, user, key }) => {
+const ModuleContainer  extends = ({ pets, user, key }) => {
     console.log(pets)
     let moduleToRender;
-    switch (key) {
+    switch ('search') {
         case 'search':
             moduleToRender = <SearchModule pets={ pets } />;
             break;
@@ -24,7 +24,8 @@ const ModuleContainer = ({ pets, user, key }) => {
     }
     console.log(moduleToRender)
     return (
-        { moduleToRender }
+        <SearchModule pets={ pets } />
+        // { moduleToRender }
     );
 }
 

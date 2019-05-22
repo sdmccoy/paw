@@ -1,8 +1,8 @@
-export default (state = [], action) => {
+export default (state = 'search', action) => {
     const { type, payload } = action;
-    console.log({payload})
+
     switch (type) {
-        case 'PET_LIST_SET':
+        case 'SET_MODULE':
             return payload;
         default:
             return state;
