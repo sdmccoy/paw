@@ -1,9 +1,15 @@
 import React , {Component} from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import './App.css';
+
+import reducers from './reducers';
 import ModuleContainer from './modules/ModuleContainer';
 import Footer from './components/Footer';
+
 import pets from './data/pets';
 import petContract from './data/petProfileContract'
+
 let petsData = petContract;
 
 class App extends Component {
@@ -35,14 +41,14 @@ class App extends Component {
   render() {
     console.log(petsData)
     return (
-      <div className="App">
+      <Provider store={createStore(reducers)} className="App">
         <ModuleContainer 
           pets={ petsData }
           // user={ user }
           // key={ key }
         />
         <Footer />
-      </div>
+      </Provider>
     );
   }
 }
