@@ -5,29 +5,25 @@ import ModuleContainer from './ModuleContainer';
 import Footer from '../components/Footer';
 
 class Layout extends Component {
-  constructor(props) {
-      super(props)
-      this.state = {}
-  }
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
 
-  componentDidMount() {
-      console.log('hey', this.props)
-    this.props.setPetList(this.props.pets);
-  }
+    componentDidMount() {
+        console.log('hey', this.props)
+      this.props.setPetList(this.props.pets);
+    }
 
-  render() {
-      console.log(this.props)
-    return (
-      <div className="App">
-        <ModuleContainer 
-          pets={ this.props.pets }
-          // user={ user }
-          // key={ key }
-        />
-        <Footer />
-      </div>
-    );
-  }
+    render() {
+        console.log(this.props)
+      return (
+        <div className="App">
+          <ModuleContainer />
+          <Footer />
+        </div>
+      );
+    }
 }
 
 let mapStateToProps = (state) => ({});
