@@ -5,7 +5,7 @@ import SettingsModule from './SettingsModule';
 
 const ModuleContainer = (props) => {
         let moduleToRender;
-        switch ('saved') {
+        switch ('settings') {
             case 'search':
                 moduleToRender = <SearchModule />;
                 break;
@@ -19,7 +19,7 @@ const ModuleContainer = (props) => {
             break;
             
             default:
-            return 'settings';
+            return 'search';
         }
         return (
             [ moduleToRender ]

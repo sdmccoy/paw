@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PetCard from '../components/PetCard';
 
 class SearchModule extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = null;
     }
@@ -18,14 +18,14 @@ class SearchModule extends Component {
         console.log(this.props)
         return (
             this.props.petList.map(pet => {
-                return <PetCard 
-                            id={pet.id}
-                            img={pet.img}
-                            name={pet.name}
-                            age={pet.age}
-                            sex={pet.sex}
-                            profile={pet.profile}
-                        />
+                return <PetCard
+                    id={pet.id}
+                    img={pet.img}
+                    name={pet.name}
+                    age={pet.age}
+                    sex={pet.sex}
+                    profile={pet.profile}
+                />
             })
         )
     }

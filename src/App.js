@@ -66,8 +66,7 @@ class App extends Component {
       <Provider store={createStore(reducers)} className="App">
         <Layout
           pets={ petsData.length > 1 ? petsData : pets }
-          user={ userData.length }
-        // key={ key }
+          user={ user }
         />
       </Provider>
     );
