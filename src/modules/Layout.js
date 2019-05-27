@@ -12,23 +12,23 @@ class Layout extends Component {
   }
 
   componentDidMount() {
-    console.log('hey', this.props)
     this.props.setPetList(this.props.pets);
     this.props.setUserSettings(this.props.user);
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="App">
-        <ModuleContainer />
+        <ModuleContainer moduleKey={this.props.moduleKey} />
         <Footer />
       </div>
     );
   }
 }
 
-let mapStateToProps = (state) => ({});
+let mapStateToProps = (state) => ({
+  moduleKey: state.button,
+});
 
 let mapDispatchToProps = (dispatch) => ({
   setPetList: (pets) => dispatch(petListSet(pets)),

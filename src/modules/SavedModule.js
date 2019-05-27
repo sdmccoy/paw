@@ -18,7 +18,7 @@ const styles = theme => ({
 
 const SavedModule = (props) => {
   const { classes } = props;
-  console.log(props)
+
   return (
       props.savedPets.map(pet => {
           return <List className={classes.root}>

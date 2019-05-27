@@ -45,7 +45,7 @@ console.log(event.target.name, event.target.value)
                     <form>
                         <div>
                             <h2>Adopter Profile</h2>
-                            <textArea>hey</textArea>
+                            <textarea>hey</textarea>
                         </div>
                         <div>
                             <h4 className={this.props.classes.h4}>Animal: </h4>

@@ -1,34 +1,42 @@
 import React, {Component} from 'react';
-import Button from './Button';
+import { connect } from 'react-redux';
+import TextButton from './TextButton';
+import { setModule } from '../actions/buttonActions';
 
 class Footer extends Component {
-    
-    handleClick(e) {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(e, moduleKey) {
         e.preventDefault();
-        // send key upstream
+        this.props.onPress(moduleKey);
     }
 
     render(){
         return (
             <div>
-                <Button
-                    key={"search"}
+                <TextButton
                     name={"Search"}
-                    onClick={this.handleClick.bind(this)}
-                    />
-                <Button
-                    key={"saved"}
+                    onClick={(e) => this.handleClick(e, 'search')}
+                />
+                <TextButton
                     name={"Saved"}
-                    onClick={this.handleClick.bind(this)}
-                    />
-                <Button
-                    key={"settings"}
+                    onClick={(e) => this.handleClick(e, 'saved')}
+                />
+                <TextButton
                     name={"Settings"}
-                    onClick={this.handleClick.bind(this)}
-                    />
+                    onClick={(e) => this.handleClick(e, 'settings')}
+                />
             </div>
         );
     }
 }
 
-export default Footer;
+let mapStateToProps = (state) => ({});
+
+let mapDispatchToProps = (dispatch) => ({
+  onPress: (moduleKey) => dispatch(setModule(moduleKey)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

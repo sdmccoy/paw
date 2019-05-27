@@ -1,4 +1,4 @@
 export const setModule = key => ({
-    action: 'SET_MODULE',
+    type: 'SET_MODULE',
     payload: key,
 });
