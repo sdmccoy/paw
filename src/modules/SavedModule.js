@@ -1,43 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import PetTag from '../components/PetTag';
+import Loading from '../components/Loading';
 
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-});
+class SavedModule extends Component {
 
-const SavedModule = (props) => {
-  const { classes } = props;
-
-  return (
-      props.savedPets.map(pet => {
-          return <List className={classes.root}>
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar alt={pet.name} src={pet.img} />
-                        </ListItemAvatar>
-                        <ListItemText primary={pet.name} secondary={pet.profile} />
-                     </ListItem>
-                 </List>
-        })
-  );
+    render() {
+        return (
+            <div>
+              { this.props.savedPets.length > 0 ?
+                this.props.savedPets.map(pet => {
+                    return <PetTag
+                                key={pet.id}
+                                pet={pet}
+                            />
+                })
+                :
+                <Loading />
+              }
+            </div>
+        );
+    }
 }
 
-// export default withStyles(styles)(FolderList);
 let mapStateToProps = (state) => ({
-    savedPets: state.search
+    savedPets: state.saved
 });
 
 let mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SavedModule));
+export default connect(mapStateToProps, mapDispatchToProps)(SavedModule);

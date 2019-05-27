@@ -8,6 +8,7 @@ class Footer extends Component {
         super(props)
         this.handleClick = this.handleClick.bind(this);
     }
+    
     handleClick(e, moduleKey) {
         e.preventDefault();
         this.props.onPress(moduleKey);

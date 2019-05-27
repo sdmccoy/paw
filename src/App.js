@@ -61,7 +61,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(userData)
     return (
       <Provider store={createStore(reducers)} className="App">
         <Layout
