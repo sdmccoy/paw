@@ -22,6 +22,8 @@ class SettingsModule extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            toggledSpecies: typeof this.props.userSettings.toggledSpecies === 'undefined' ? false : this.props.userSettings.toggledSpecies,
+            id: this.props.userSettings.id || 0,
             typePreference: this.props.userSettings.typePreference || 'dog',
             profile: this.props.userSettings.profile || '',
             max: this.props.userSettings.ageRange.max || 0,
@@ -30,12 +32,12 @@ class SettingsModule extends Component {
     }
 
     handleChange = event => {
-        console.log(event.target.value)
         this.setState({ [event.target.name]: event.target.value });
     };
 
     handleToggle = name => event => {
-        const species = event.target.checked ? 'cat' : 'dog';
+        const species = event.target.checked ? 'dog' : 'cat';
+        this.setState({ [name]: event.target.checked })
         this.setState({ typePreference: species });
     };
 
@@ -45,8 +47,6 @@ class SettingsModule extends Component {
     }
 
     render() {
-        console.log('settings = ', this.props.userSettings)
-        console.log(this.state)
         return (
             <div>
                 <Paper className={this.props.classes.root} elevation={1}>
@@ -65,9 +65,10 @@ class SettingsModule extends Component {
                             <h4 className={this.props.classes.h4}>Animal: </h4>
                             <label>Cat</label>
                             <Switch
+                                checked={this.state.toggledSpecies}
                                 onChange={this.handleToggle('toggledSpecies')}
                                 value={this.state.typePreference}
-                                color="default"
+                                color='default'
                             />
                             <label>Dog</label>
                         </div>
@@ -93,6 +94,7 @@ class SettingsModule extends Component {
                         <TextButton
                             variant='outlined'
                             color='primary'
+                            size='medium'
                             name='Save'
                             onClick={this.handleSubmit.bind(this)}
                         />
@@ -102,7 +104,7 @@ class SettingsModule extends Component {
         )
     }
 }
-//map the pet list state to this module props
+
 let mapStateToProps = (state) => ({
     userSettings: state.settings
 });

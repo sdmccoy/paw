@@ -10,13 +10,8 @@ class SearchModule extends Component {
         super(props);
         this.state = {
             counter: 0,
+            filteredPets: [],
         };
-    }
-
-    filterBySettings() {
-        this.props.petList.filter(pet => {
-            return true;
-        })
     }
 
     handleClick(e, action, petId, currentPet = {}) {
@@ -29,11 +24,17 @@ class SearchModule extends Component {
     }
 
     render() {
-        const currentPet = this.props.petList[0]; 
-        console.log(this.props, currentPet, this.state)
+        const { userSettings, petList } = this.props;
+        console.log(userSettings)
+        const filteredPets = petList.filter(pet => pet.type === userSettings.typePreference &&
+                pet.age >= parseInt(userSettings.ageRange.min, 10) &&
+                pet.age <= parseInt(userSettings.ageRange.max, 10)
+        )
+        const currentPet = filteredPets[0];
+
         return (
             <div>
-                { this.props.petList.length > 0 ?
+                { filteredPets.length > 0 ?
                     <div>
                         <PetCard
                             id={currentPet.id}
@@ -45,15 +46,15 @@ class SearchModule extends Component {
                         />
                         <TextButton
                             variant='contained'
-                            size="small"
-                            color="secondary"
+                            size='small'
+                            color='secondary'
                             name='Not Now'
                             onClick={(e) => this.handleClick(e, 'remove', currentPet.id)}
                         />
                         <TextButton
                             variant='contained'
-                            size="small"
-                            color="primary"
+                            size='small'
+                            color='primary'
                             name='Pawsibly'
                             onClick={(e) => this.handleClick(e, 'save', currentPet.id, currentPet)}
                         />
@@ -67,7 +68,8 @@ class SearchModule extends Component {
 }
 
 let mapStateToProps = (state) => ({
-    petList: state.search
+    petList: state.search,
+    userSettings: state.settings,
 });
 
 let mapDispatchToProps = (dispatch) => ({

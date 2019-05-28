@@ -5,7 +5,13 @@ export default (state = {}, action) => {
         case 'SET_USER_SETTINGS':
             return payload;
         case 'SAVE_USER_SETTINGS':
-            const profile = Object.assign(state, payload)
+        console.log(payload)
+            const profile = Object.assign({}, payload, {
+                ageRange: {
+                    max: payload.max,
+                    min: payload.min,
+                }
+            })
             delete profile.max;
             delete profile.min;
             return profile;
