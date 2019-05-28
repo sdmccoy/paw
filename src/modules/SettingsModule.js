@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
+import TextButton from '../components/TextButton';
+import { userSettingsSave } from '../actions/settingsActions';
 
 const styles = theme => ({
     root: {
@@ -20,24 +22,30 @@ class SettingsModule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            toggledSpecies: true,
-            max: 0,
-            min: 0,
+            typePreference: this.props.userSettings.typePreference || 'dog',
+            profile: this.props.userSettings.profile || '',
+            max: this.props.userSettings.ageRange.max || 0,
+            min: this.props.userSettings.ageRange.min || 0,
         };
     }
 
     handleChange = event => {
-console.log(event.target.name, event.target.value)
+        console.log(event.target.value)
         this.setState({ [event.target.name]: event.target.value });
     };
 
     handleToggle = name => event => {
-        console.log({name}, event.target)
-        this.setState({ [name]: event.target.checked });
+        const species = event.target.checked ? 'cat' : 'dog';
+        this.setState({ typePreference: species });
     };
 
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.saveProfile(this.state)
+    }
+
     render() {
-        console.log('settings = ', this.props)
+        console.log('settings = ', this.props.userSettings)
         console.log(this.state)
         return (
             <div>
@@ -45,15 +53,20 @@ console.log(event.target.name, event.target.value)
                     <form>
                         <div>
                             <h2>Adopter Profile</h2>
-                            <textarea>hey</textarea>
+                            <textarea 
+                                type='text'
+                                name='profile'
+                                placeholder='About me'
+                                value={this.state.profile}
+                                onChange={this.handleChange}
+                            />
                         </div>
                         <div>
                             <h4 className={this.props.classes.h4}>Animal: </h4>
                             <label>Cat</label>
                             <Switch
-                                checked={this.state.toggledSpecies}
                                 onChange={this.handleToggle('toggledSpecies')}
-                                value="toggledSpecies"
+                                value={this.state.typePreference}
                                 color="default"
                             />
                             <label>Dog</label>
@@ -77,6 +90,12 @@ console.log(event.target.name, event.target.value)
                                 onChange={this.handleChange}
                             />
                         </div>
+                        <TextButton
+                            variant='outlined'
+                            color='primary'
+                            name='Save'
+                            onClick={this.handleSubmit.bind(this)}
+                        />
                     </form>
                 </Paper>
             </div>
@@ -88,6 +107,8 @@ let mapStateToProps = (state) => ({
     userSettings: state.settings
 });
 
-let mapDispatchToProps = (dispatch) => ({});
+let mapDispatchToProps = (dispatch) => ({
+    saveProfile: (profile) => dispatch(userSettingsSave(profile))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SettingsModule));

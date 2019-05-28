@@ -7,10 +7,13 @@ const buttonStyles = {
   },
 }
 
-const TextButton = ({onClick, name}) => {
-
+const TextButton = (props) => {
+    const { variant, size, color, name, onClick } = props;
   return (
-        <Button 
+        <Button
+            variant={variant || ''}
+            size={size || ''}
+            color={color || ''}
             className={buttonStyles.button}
             onClick={onClick}
         >

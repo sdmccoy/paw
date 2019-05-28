@@ -18,15 +18,24 @@ class Footer extends Component {
         return (
             <div>
                 <TextButton
-                    name={"Search"}
+                    variant='text'
+                    size='medium'
+                    color='default'
+                    name={'Search'}
                     onClick={(e) => this.handleClick(e, 'search')}
                 />
                 <TextButton
-                    name={"Saved"}
+                    variant='text'
+                    size='medium'
+                    color='default'
+                    name={'Saved'}
                     onClick={(e) => this.handleClick(e, 'saved')}
                 />
                 <TextButton
-                    name={"Settings"}
+                    variant='text'
+                    size='medium'
+                    color='default'
+                    name={'Settings'}
                     onClick={(e) => this.handleClick(e, 'settings')}
                 />
             </div>

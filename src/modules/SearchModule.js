@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetCard from '../components/PetCard';
-import Button from '@material-ui/core/Button';
+import TextButton from '../components/TextButton';
 import Loading from '../components/Loading';
 import { filterPetList, addToSavedList } from '../actions/searchActions';
 
@@ -21,14 +21,15 @@ class SearchModule extends Component {
 
     handleClick(e, action, petId, currentPet = {}) {
         e.preventDefault();
-        const tickUp = this.state.counter +1;
+        const tickUp = this.state.counter + 1;
+        console.log(tickUp)
         this.setState({ counter: tickUp });
         action === 'save' && this.props.savePet(currentPet);
         this.props.removePet(petId);
     }
 
     render() {
-        const currentPet = this.props.petList[1]; 
+        const currentPet = this.props.petList[0]; 
         console.log(this.props, currentPet, this.state)
         return (
             <div>
@@ -42,20 +43,20 @@ class SearchModule extends Component {
                             sex={currentPet.sex}
                             profile={currentPet.profile}
                         />
-                        <Button
+                        <TextButton
                             variant='contained'
                             size="small"
                             color="secondary"
-                            onClick={(e) => this.handleClick(e, 'remove', currentPet.id)}>
-                        Not now
-                        </Button>
-                        <Button
+                            name='Not Now'
+                            onClick={(e) => this.handleClick(e, 'remove', currentPet.id)}
+                        />
+                        <TextButton
                             variant='contained'
                             size="small"
                             color="primary"
-                            onClick={(e) => this.handleClick(e, 'save', currentPet.id, currentPet)}>
-                        Pawsibly
-                        </Button>
+                            name='Pawsibly'
+                            onClick={(e) => this.handleClick(e, 'save', currentPet.id, currentPet)}
+                        />
                     </div>
                     :
                     <Loading />    
