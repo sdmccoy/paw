@@ -7,6 +7,6 @@ import saved from './savedReducer';
 export default combineReducers({
     button,
     search,
-    saved,
+    saved, //using local storage instead
     settings,
 })

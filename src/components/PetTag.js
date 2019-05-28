@@ -16,7 +16,7 @@ const styles = theme => ({
   
 const PetTag = (props) => {
     const { classes, pet } = props;
-console.log(pet)
+
     return(
         <List className={classes.root}>
             <ListItem>

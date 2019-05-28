@@ -14,7 +14,6 @@ import userContract from './data/userProfileContract'
 let petsData = petContract;
 let userData = userContract;
 
-
 class App extends Component {
 
   componentDidMount() {
@@ -65,7 +64,7 @@ class App extends Component {
       <Provider store={createStore(reducers)} className="App">
         <Layout
           pets={ petsData.length > 1 ? petsData : pets }
-          user={ user }
+          user={ userData.id ? userData : user }
         />
       </Provider>
     );

@@ -17,7 +17,6 @@ class SearchModule extends Component {
     handleClick(e, action, petId, currentPet = {}) {
         e.preventDefault();
         const tickUp = this.state.counter + 1;
-        console.log(tickUp)
         this.setState({ counter: tickUp });
         action === 'save' && this.props.savePet(currentPet);
         this.props.removePet(petId);
@@ -25,7 +24,6 @@ class SearchModule extends Component {
 
     render() {
         const { userSettings, petList } = this.props;
-        console.log(userSettings)
         const filteredPets = petList.filter(pet => pet.type === userSettings.typePreference &&
                 pet.age >= parseInt(userSettings.ageRange.min, 10) &&
                 pet.age <= parseInt(userSettings.ageRange.max, 10)

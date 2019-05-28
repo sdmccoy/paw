@@ -8,15 +8,15 @@ const ModuleContainer = (props) => {
 
         switch (props.moduleKey) {
             case 'search':
-                moduleToRender = <SearchModule />;
+                moduleToRender = <SearchModule key='search' />;
                 break;
     
             case 'saved':
-                moduleToRender = <SavedModule />;
+                moduleToRender = <SavedModule key='saved' />;
                 break;
                 
             case 'settings':
-                moduleToRender = <SettingsModule />;
+                moduleToRender = <SettingsModule key='settings' />;
                 break;
             
             default:

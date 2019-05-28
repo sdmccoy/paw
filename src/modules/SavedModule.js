@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PetTag from '../components/PetTag';
 import PetCard from '../components/PetCard';
-import Loading from '../components/Loading';
 import { Modal, CardActionArea } from '@material-ui/core';
 import Note from '../components/Note';
 
@@ -14,21 +12,19 @@ class SavedModule extends Component {
     }
 
     handleOpen(e, id) {
-        console.log(localStorage.getItem(id))
         e.preventDefault();
         this.setState({ openModal: true, petId: id });
     }
 
     handleClose(e) {
-        console.log(e)
         e.preventDefault();
         this.setState({ openModal: false });
     }
 
     render() {
-      const currentPet = JSON.parse(localStorage.getItem(this.state.petId));
-      const savedPets = JSON.parse(localStorage.getItem('savedPets')) ? JSON.parse(localStorage.getItem('savedPets')) : [];
-      console.log({savedPets})
+        const savedPets = JSON.parse(localStorage.getItem('savedPets')) ? JSON.parse(localStorage.getItem('savedPets')) : [];
+        const currentPet = savedPets.find(pet => pet.id === this.state.petId);
+
         return (
             <div>
               { savedPets.length > 0 ?
@@ -67,10 +63,4 @@ class SavedModule extends Component {
     }
 }
 
-let mapStateToProps = (state) => ({
-    savedPets: state.saved
-});
-
-let mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SavedModule);
+export default SavedModule;
