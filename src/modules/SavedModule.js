@@ -4,16 +4,17 @@ import PetTag from '../components/PetTag';
 import PetCard from '../components/PetCard';
 import Loading from '../components/Loading';
 import { Modal, CardActionArea } from '@material-ui/core';
+import Note from '../components/Note';
 
 
 class SavedModule extends Component {
     state = {
         openModal: false,
-        pet: null,
+        petId: null,
     }
 
     handleOpen(e, id) {
-        console.log(id)
+        console.log(localStorage.getItem(id))
         e.preventDefault();
         this.setState({ openModal: true, petId: id });
     }
@@ -25,26 +26,27 @@ class SavedModule extends Component {
     }
 
     render() {
-      const currentPet = this.props.savedPets.find(pet => pet.id === this.state.petId);
+      const currentPet = JSON.parse(localStorage.getItem(this.state.petId));
+      const savedPets = JSON.parse(localStorage.getItem('savedPets')) ? JSON.parse(localStorage.getItem('savedPets')) : [];
+      console.log({savedPets})
         return (
             <div>
-              { this.props.savedPets.length > 0 ?
-                this.props.savedPets.map(pet => {
+              { savedPets.length > 0 ?
+                savedPets.map(pet => {
                     return (
-                      <CardActionArea key={pet.id} onClick={(e) => this.handleOpen(e, pet.id)}>
-
-                              <PetTag
-                                key={pet.id}
-                                pet={pet}
-                                
-                                />
-                      </CardActionArea>
-                          )
+                        <CardActionArea key={pet.id} onClick={(e) => this.handleOpen(e, pet.id)}>
+                            <PetTag
+                              key={pet.id}
+                              pet={pet}
+                            />
+                        </CardActionArea>
+                    )
                 })
                 :
-                <Loading />
+                <Note
+                    message={'No saved pets yet. Start clicking "Pawsible"!'} 
+                />
               }
-
               { this.state.openModal &&
                 <Modal 
                     open={this.state.openModal}
