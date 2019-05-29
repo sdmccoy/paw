@@ -9,8 +9,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 const styles = theme => ({
     root: {
       width: '100%',
-      maxWidth: 360,
+      maxWidth: 345,
       backgroundColor: theme.palette.background.paper,
+      margin: 'auto',
     },
 });
   

@@ -26,14 +26,14 @@ class SavedModule extends Component {
         const currentPet = savedPets.find(pet => pet.id === this.state.petId);
 
         return (
-            <div>
+            <div styles={{margin: 'auto'}}>
               { savedPets.length > 0 ?
                 savedPets.map(pet => {
                     return (
                         <CardActionArea key={pet.id} onClick={(e) => this.handleOpen(e, pet.id)}>
                             <PetTag
-                              key={pet.id}
-                              pet={pet}
+                                key={pet.id}
+                                pet={pet}
                             />
                         </CardActionArea>
                     )

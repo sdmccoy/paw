@@ -11,10 +11,15 @@ const styles = theme => ({
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
+      maxWidth: 345,
+      margin: 'auto',
     },
     h4: {
         display: 'inline',
         margin: 10,
+    },
+    input: {
+        display: 'block',
     }
 });
 
@@ -74,19 +79,21 @@ class SettingsModule extends Component {
                         </div>
                         <div>
                             <h4 className={this.props.classes.h4}>Age: </h4>
+                            <br />
+                            <label>Min: </label>
                             <input 
                                 type='number'
                                 name='min'
                                 min={0}
-                                placeholder='min'
                                 value={this.state.min}
                                 onChange={this.handleChange}
                             />
+                            <br />
+                            <label>Max: </label>
                             <input 
                                 type='number'
                                 name='max'
                                 min={0}
-                                placeholder='max'
                                 value={this.state.max}
                                 onChange={this.handleChange}
                             />
